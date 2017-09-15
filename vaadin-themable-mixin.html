@@ -56,8 +56,7 @@
 
       // On updateStyles we recompute the theme attribute based on custom CSS properties
       const currentTheme = this.theme || '';
-      const computedElemTheme = this._getComputedStyle(`--${this.localName}-theme`);
-      const computedTheme = computedElemTheme || this._getComputedStyle(`--theme`);
+      const computedTheme = this._getComputedStyle(`--theme`);
       // We only update theme attribute if the current theme does not includes the computed value
       if (computedTheme && !RegExp(`(^| )${computedTheme}( |$)`).test(currentTheme)) {
         this.theme = (currentTheme ? currentTheme + ' ' : '') + computedTheme;
@@ -69,6 +68,7 @@
 
     _getComputedStyle(name) {
       // When getting the computed value, we need to remove wrapping spaces and quotes.
+      // TODO use ShadyCSS.getComputedStyleValue
       return window.getComputedStyle(this).getPropertyValue(name).trim().replace(/^"(.*)"$/, '$1');
     }
 

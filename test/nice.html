@@ -1,0 +1,115 @@
+<!doctype html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>vaadin-themable-mixin tests</title>
+
+  <link rel="import" href="../vaadin-themable-mixin.html">
+  <link rel="import" href="../../polymer/polymer-element.html">
+
+</head>
+
+<body>
+
+  <dom-module id="test-foo">
+    <template>
+      <style>
+        :host {
+          display: block;
+          --theme: var(--test-foo-theme);
+        }
+
+        :host([theme~="foo-theme"]) {
+          color: red;
+        }
+
+        :host([theme~="foo-theme"]) test-bar {
+          --theme: "bar-theme";
+        }
+      </style>
+      <div part="text">test-foo</div>
+      <test-bar></test-bar>
+    </template>
+  </dom-module>
+
+  <dom-module id="test-bar">
+    <template>
+      <style>
+        :host {
+          display: block;
+          --theme: var(--test-bar-theme);
+        }
+
+        :host([theme~="bar-theme"]) {
+          color: green;
+        }
+
+        :host([theme~="bar-theme"]) test-baz {
+          --theme: inherit;
+        }
+      </style>
+      <div part="text" id="text">test-bar</div>
+      <test-baz></test-baz>
+    </template>
+  </dom-module>
+
+  <dom-module id="test-baz">
+    <template>
+      <style>
+        :host {
+          display: block;
+          --theme: var(--test-baz-theme);
+        }
+
+        :host([theme~="bar-theme"]) {
+          color: blue;
+        }
+
+        :host([theme~="big"]) {
+          font-size: 2em;
+        }
+      </style>
+      <div part="text">test-baz</div>
+    </template>
+  </dom-module>
+
+  <script>
+    class TestFoo extends Vaadin.ThemableMixin(Polymer.Element) {
+      static get is() {
+        return 'test-foo';
+      }
+    }
+    customElements.define(TestFoo.is, TestFoo);
+
+    class TestBar extends Vaadin.ThemableMixin(Polymer.Element) {
+      static get is() {
+        return 'test-bar';
+      }
+    }
+    customElements.define(TestBar.is, TestBar);
+
+    class TestBaz extends Vaadin.ThemableMixin(Polymer.Element) {
+      static get is() {
+        return 'test-baz';
+      }
+    }
+    customElements.define(TestBaz.is, TestBaz);
+  </script>
+
+  <style>
+    test-foo {
+      --theme: "foo-theme";
+    }
+
+    test-baz {
+      --theme: "bar-theme big";
+    }
+  </style>
+
+  <test-foo></test-foo>
+  <br>
+  <test-bar theme="bar-theme"></test-bar>
+  <br>
+  <test-baz></test-baz>
+
+</body>
