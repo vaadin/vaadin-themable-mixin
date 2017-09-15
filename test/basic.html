@@ -20,7 +20,7 @@
           :host {
             display: block;
             --theme: 'foo';
-            --test-bar-theme: 'bar';
+            --test-qux-theme: 'qux';
           }
         </style>
         <div part="text" id="text">text</div>
@@ -78,6 +78,10 @@
     <dom-module id="test-qux-default-theme" theme-for="test-qux">
       <template>
         <style>
+          :host {
+            --theme: var(--test-qux-theme);
+          }
+
           [part="text"] {
             color: rgb(255, 0, 0);
           }
@@ -202,11 +206,11 @@
         });
 
         it('should set children `theme` attribute based on the `--theme` custom css property', function() {
-          expect(components[0].$.ibar.$.iqux.theme).to.equal('foo');
+          expect(components[0].$.ibar.theme).to.equal('foo');
         });
 
-        it('should update `theme` attribute with `--element-name-theme` value instead of `--theme`', function() {
-          expect(components[0].$.ibar.theme).to.equal('bar');
+        it('should be possible to override `--theme` with another custom property', function() {
+          expect(components[0].$.ibar.$.iqux.theme).to.equal('qux');
         });
       });
     });

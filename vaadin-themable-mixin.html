@@ -62,14 +62,14 @@
         this.theme = (currentTheme ? currentTheme + ' ' : '') + computedTheme;
       }
 
-      // We cascade updating styles of themable-mixin children elements
+      // We update styles in cascade, but only in themable elements
       Array.from(this.root.querySelectorAll('*')).forEach(e => e.constructor._memoizedThemableMixinTemplate && e.updateStyles());
     }
 
     _getComputedStyle(name) {
-      // When getting the computed value, we need to remove wrapping spaces and quotes.
-      // TODO use ShadyCSS.getComputedStyleValue
-      return window.getComputedStyle(this).getPropertyValue(name).trim().replace(/^"(.*)"$/, '$1');
+      return (window.ShadyCSS ? window.ShadyCSS.getComputedStyleValue(this, name) : getComputedStyle(this).getPropertyValue(name))
+        // When getting the computed value, we need to remove wrapping spaces and quotes.
+        .trim().replace(/^"(.*)"$/, '$1');
     }
 
     static includeStyle(moduleName) {
