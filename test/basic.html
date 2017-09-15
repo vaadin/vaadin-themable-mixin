@@ -201,11 +201,11 @@
           expect(components[0].theme).to.equal('foo');
         });
 
-        it('should set children `theme` attribute based on the `--theme` custom css property', function () {
+        it('should set children `theme` attribute based on the `--theme` custom css property', function() {
           expect(components[0].$.ibar.$.iqux.theme).to.equal('foo');
         });
 
-        it('should update `theme` attribute with `--element-name-theme` value instead of `--theme`', function () {
+        it('should update `theme` attribute with `--element-name-theme` value instead of `--theme`', function() {
           expect(components[0].$.ibar.theme).to.equal('bar');
         });
       });

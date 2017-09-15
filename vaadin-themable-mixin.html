@@ -60,7 +60,7 @@
       const computedTheme = computedElemTheme || this._getComputedStyle(`--theme`);
       // We only update theme attribute if the current theme does not includes the computed value
       if (computedTheme && !RegExp(`(^| )${computedTheme}( |$)`).test(currentTheme)) {
-        this.theme =  (currentTheme ? currentTheme + ' ' : '') + computedTheme;
+        this.theme = (currentTheme ? currentTheme + ' ' : '') + computedTheme;
       }
 
       // We cascade updating styles of themable-mixin children elements
