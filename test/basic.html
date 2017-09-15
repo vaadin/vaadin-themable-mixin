@@ -43,7 +43,7 @@
   </div>
 
   <script>
-  document.addEventListener('WebComponentsReady', function() {
+  document.addEventListener('WebComponentsReady', () => {
     class TestFoo extends Vaadin.ThemableMixin(Polymer.Element) {
       static get is() {
         return 'test-foo';
@@ -157,60 +157,58 @@
   </test-fixture>
 
   <script>
-    describe('injecting style modules', function() {
+    describe('injecting style modules', () => {
       let components;
 
-      beforeEach(function() {
-        components = fixture('default');
-      });
+      beforeEach(() => components = fixture('default'));
 
-      it('should inject simple module', function() {
+      it('should inject simple module', () => {
         expect(window.getComputedStyle(components[0].$.text).color).to.equal('rgb(255, 255, 255)');
       });
 
-      it('should inject multiple style modules', function() {
+      it('should inject multiple style modules', () => {
         expect(window.getComputedStyle(components[0].$.text).color).to.equal('rgb(255, 255, 255)');
         expect(window.getComputedStyle(components[0].$.text).backgroundColor).to.equal('rgb(255, 0, 0)');
       });
 
-      it('should inject to multiple components', function() {
+      it('should inject to multiple components', () => {
         expect(window.getComputedStyle(components[0].$.text).backgroundColor).to.equal('rgb(255, 0, 0)');
         expect(window.getComputedStyle(components[1].$.text).backgroundColor).to.equal('rgb(255, 0, 0)');
       });
 
-      it('should inject to subclassed components', function() {
+      it('should inject to subclassed components', () => {
         expect(window.getComputedStyle(components[2].$.text).backgroundColor).to.equal('rgb(255, 0, 0)');
       });
 
-      it('should inject to wildcard styles', function() {
+      it('should inject to wildcard styles', () => {
         expect(window.getComputedStyle(components[0].$.text).position).to.equal('static');
         expect(window.getComputedStyle(components[1].$.text).position).to.equal('relative');
         expect(window.getComputedStyle(components[2].$.text).position).to.equal('relative');
       });
 
-      it('should override default value', function() {
+      it('should override default value', () => {
         expect(window.getComputedStyle(components[0]).display).to.equal('flex');
       });
 
-      it('should fall back to default styles', function() {
+      it('should fall back to default styles', () => {
         expect(window.getComputedStyle(components[3].$.text).color).to.equal('rgb(255, 0, 0)');
       });
 
-      it('should work with themable parent', function() {
+      it('should work with themable parent', () => {
         expect(window.getComputedStyle(components[2].$.text).width).to.equal('100px');
       });
 
-      describe('updating theme attribute', function() {
-        it('should set host `theme` attribute based on the `--theme` custom css property', function() {
-          expect(components[0].theme).to.equal('foo');
+      describe('updating theme attribute', () => {
+        it('should set host `theme` attribute based on the `--theme` custom css property', () => {
+          expect(components[0].getAttribute('theme')).to.equal('foo');
         });
 
-        it('should set children `theme` attribute based on the `--theme` custom css property', function() {
-          expect(components[0].$.ibar.theme).to.equal('foo');
+        it('should set children `theme` attribute based on the `--theme` custom css property', () => {
+          expect(components[0].$.ibar.getAttribute('theme')).to.equal('foo');
         });
 
-        it('should be possible to override `--theme` with another custom property', function() {
-          expect(components[0].$.ibar.$.iqux.theme).to.equal('qux');
+        it('should be possible to override `--theme` with another custom property', () => {
+          expect(components[0].$.ibar.$.iqux.getAttribute('theme')).to.equal('qux');
         });
       });
     });

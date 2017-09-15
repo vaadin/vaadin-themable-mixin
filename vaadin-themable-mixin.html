@@ -50,7 +50,7 @@
       const computedTheme = this._getComputedStyle(`--theme`);
       // We only update theme attribute if the current theme does not includes the computed value
       if (computedTheme && !RegExp(`(^| )${computedTheme}( |$)`).test(currentTheme)) {
-        this.setAttribute('theme',  (currentTheme ? currentTheme + ' ' : '') + computedTheme);
+        this.setAttribute('theme', (currentTheme ? currentTheme + ' ' : '') + computedTheme);
       }
 
       // We update styles in cascade, but only in themable elements
