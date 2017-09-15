@@ -7,15 +7,6 @@
    * @polymerMixin
    */
   Vaadin.ThemableMixin = superClass => class VaadinThemableMixin extends superClass {
-    static get properties() {
-      return {
-        theme: {
-          type: String,
-          reflectToAttribute: true
-        }
-      };
-    }
-
     static get template() {
       if (super.template && !this.hasOwnProperty('_memoizedThemableMixinTemplate')) {
         this._memoizedThemableMixinTemplate = super.template.cloneNode(true);
@@ -55,11 +46,11 @@
       super.updateStyles();
 
       // On updateStyles we recompute the theme attribute based on custom CSS properties
-      const currentTheme = this.theme || '';
+      const currentTheme = this.getAttribute('theme') || '';
       const computedTheme = this._getComputedStyle(`--theme`);
       // We only update theme attribute if the current theme does not includes the computed value
       if (computedTheme && !RegExp(`(^| )${computedTheme}( |$)`).test(currentTheme)) {
-        this.theme = (currentTheme ? currentTheme + ' ' : '') + computedTheme;
+        this.setAttribute('theme',  (currentTheme ? currentTheme + ' ' : '') + computedTheme);
       }
 
       // We update styles in cascade, but only in themable elements
