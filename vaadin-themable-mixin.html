@@ -7,6 +7,14 @@
    * @polymerMixin
    */
   Vaadin.ThemableMixin = superClass => class VaadinThemableMixin extends superClass {
+    static get properties() {
+      return {
+        theme: {
+          type: String,
+          reflectToAttribute: true
+        }
+      };
+    }
 
     static get template() {
       if (super.template && !this.hasOwnProperty('_memoizedThemableMixinTemplate')) {
@@ -36,6 +44,32 @@
         }
       }
       return this._memoizedThemableMixinTemplate;
+    }
+
+    ready() {
+      super.ready();
+      this.updateStyles();
+    }
+
+    updateStyles() {
+      super.updateStyles();
+
+      // On updateStyles we recompute the theme attribute based on custom CSS properties
+      const currentTheme = this.theme || '';
+      const computedElemTheme = this._getComputedStyle(`--${this.localName}-theme`);
+      const computedTheme = computedElemTheme || this._getComputedStyle(`--theme`);
+      // We only update theme attribute if the current theme does not includes the computed value
+      if (computedTheme && !RegExp(`(^| )${computedTheme}( |$)`).test(currentTheme)) {
+        this.theme =  (currentTheme ? currentTheme + ' ' : '') + computedTheme;
+      }
+
+      // We cascade updating styles of themable-mixin children elements
+      Array.from(this.root.querySelectorAll('*')).forEach(e => e.constructor._memoizedThemableMixinTemplate && e.updateStyles());
+    }
+
+    _getComputedStyle(name) {
+      // When getting the computed value, we need to remove wrapping spaces and quotes.
+      return window.getComputedStyle(this).getPropertyValue(name).trim().replace(/^"(.*)"$/, '$1');
     }
 
     static includeStyle(moduleName) {
