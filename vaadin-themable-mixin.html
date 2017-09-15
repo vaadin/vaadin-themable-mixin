@@ -46,12 +46,14 @@
       super.updateStyles();
 
       // On updateStyles we recompute the theme attribute based on custom CSS properties
-      const currentTheme = this.getAttribute('theme') || '';
-      const computedTheme = this._getComputedStyle(`--theme`);
-      // We only update theme attribute if the current theme does not includes the computed value
-      if (computedTheme && !RegExp(`(^| )${computedTheme}( |$)`).test(currentTheme)) {
-        this.setAttribute('theme', (currentTheme ? currentTheme + ' ' : '') + computedTheme);
-      }
+      // theme attribute and --theme property can contain multiple themes separated by space
+      const currentThemes = (this.getAttribute('theme') || '').split(/ +/);
+      const computedThemes = this._getComputedStyle(`--theme`).split(/ +/);
+
+      // We only update theme attribute if the current theme does not includes any of the computed values
+      // console.log(this.localName,currentThemes, computedThemes)
+      computedThemes.forEach((theme) => currentThemes.indexOf(theme) < 0 && currentThemes.push(theme));
+      this.setAttribute('theme', currentThemes.join(' ').trim());
 
       // We update styles in cascade, but only in themable elements
       Array.from(this.root.querySelectorAll('*')).forEach(e => e.constructor._memoizedThemableMixinTemplate && e.updateStyles());

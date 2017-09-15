@@ -31,7 +31,8 @@
     <dom-module id="test-bar">
       <template>
         <div part="text" id="text">text</div>
-        <test-qux id="iqux"></test-qux>
+        <test-qux part="qux-1"></test-qux>
+        <test-qux part="qux-2"></test-qux>
       </template>
     </dom-module>
 
@@ -111,6 +112,16 @@
 
           [part="text"] {
             color: rgb(255, 255, 255);
+          }
+        </style>
+      </template>
+    </dom-module>
+
+    <dom-module id="test-styles-nested" theme-for="test-bar">
+      <template>
+        <style>
+          [part="qux-2"] {
+            --theme: "qux2";
           }
         </style>
       </template>
@@ -208,7 +219,11 @@
         });
 
         it('should be possible to override `--theme` with another custom property', () => {
-          expect(components[0].$.ibar.$.iqux.getAttribute('theme')).to.equal('qux');
+          expect(components[0].$.ibar.root.querySelector('[part="qux-1"]').getAttribute('theme')).to.equal('qux');
+        });
+
+        it('should be possible to theme a specific neste component', () => {
+          expect(components[0].$.ibar.root.querySelector('[part="qux-2"]').getAttribute('theme')).to.equal('qux2');
         });
       });
     });
