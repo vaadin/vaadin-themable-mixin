@@ -60,7 +60,7 @@
     _getComputedStyle(name) {
       return (window.ShadyCSS ? window.ShadyCSS.getComputedStyleValue(this, name) : getComputedStyle(this).getPropertyValue(name))
         // When getting the computed value, we need to remove wrapping spaces and quotes.
-        .trim().replace(/^"(.*)"$/, '$1');
+        .trim().replace(/^['"](.*)["']$/, '$1');
     }
 
     static includeStyle(moduleName) {
