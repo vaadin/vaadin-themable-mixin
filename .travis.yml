@@ -23,6 +23,9 @@ before_script:
 script:
   - if [[ "$TRAVIS_EVENT_TYPE" != "pull_request" && "$TRAVIS_BRANCH" != quick/* ]]; then
       wct --env saucelabs;
+      modulizer --npm-name @vaadin/vaadin-themable-mixin --npm-version 0.0.0;
+      cd modulizer_out && npm install && cd ..;
+      polymer test --npm --env saucelabs-p3 --root modulizer_out;
     fi
   - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then
       wct --env saucelabs-cron;
