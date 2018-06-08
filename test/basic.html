@@ -196,6 +196,11 @@
         expect(window.getComputedStyle(components[2].$.text).width).to.equal('100px');
       });
 
+      it('should have a `theme` attribute', function() {
+        components[0].theme = 'foo';
+        expect(components[0].getAttribute('theme')).to.equal('foo');
+      });
+
       it('should not warn about missing default theme', function() {
         class TestNoTheme extends Vaadin.ThemableMixin(Polymer.Element) {
           static get is() {

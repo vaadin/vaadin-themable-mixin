@@ -12,6 +12,18 @@
    */
   Vaadin.ThemableMixin = superClass => class VaadinThemableMixin extends superClass {
 
+    static get properties() {
+      return {
+        /**
+         * Built-in variations of a component theme are applied using the `theme` attribute.
+         */
+        theme: {
+          type: String,
+          reflectToAttribute: true
+        }
+      };
+    }
+
     static get template() {
       const modules = Polymer.DomModule.prototype.modules;
 
