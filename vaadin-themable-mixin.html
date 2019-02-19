@@ -43,8 +43,12 @@
         .sort((moduleNameA, moduleNameB) => {
           const vaadinA = moduleNameA.indexOf('vaadin-') === 0;
           const vaadinB = moduleNameB.indexOf('vaadin-') === 0;
+          const priorityA = parseFloat(modules[moduleNameA].getAttribute('priority') || 0);
+          const priorityB = parseFloat(modules[moduleNameB].getAttribute('priority') || 0);
 
-          if (vaadinA !== vaadinB) {
+          if (priorityA !== priorityB) {
+            return priorityA < priorityB ? -1 : 1;
+          } if (vaadinA !== vaadinB) {
             return vaadinA ? -1 : 1;
           } else {
             return 0;
