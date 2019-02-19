@@ -40,16 +40,16 @@
       const defaultModuleName = this.is + '-default-theme';
 
       Object.keys(modules)
-        // Sort the style modules by id
-        // 1st priority is vaadin- prefix
-        // 2nd priority is the original order
         .sort((moduleNameA, moduleNameB) => {
-          if (moduleNameA.indexOf('vaadin-') === 0 && moduleNameB.indexOf('vaadin-') === 0) {
-            return 0;
-          } else if (moduleNameA.indexOf('vaadin-') === 0) {
-            return -1;
-          } else if (moduleNameB.indexOf('vaadin-') === 0) {
-            return 1;
+          const vaadinA = moduleNameA.indexOf('vaadin-') === 0;
+          const vaadinB = moduleNameB.indexOf('vaadin-') === 0;
+          const priorityA = parseFloat(modules[moduleNameA].getAttribute('priority') || 0);
+          const priorityB = parseFloat(modules[moduleNameB].getAttribute('priority') || 0);
+
+          if (priorityA !== priorityB) {
+            return priorityA < priorityB ? -1 : 1;
+          } if (vaadinA !== vaadinB) {
+            return vaadinA ? -1 : 1;
           } else {
             return 0;
           }

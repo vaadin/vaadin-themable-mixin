@@ -181,6 +181,30 @@
       </template>
     </dom-module>
 
+    <dom-module id="priority-test-style-override-styles-first" theme-for="test-style-override" priority="2">
+      <template>
+        <style>
+          [part="text"] {
+            width: 100px;
+          }
+        </style>
+      </template>
+    </dom-module>
+
+    <dom-module id="priority-test-style-override-styles-second" theme-for="test-style-override" priority="1">
+      <template>
+        <style>
+          [part="text"] {
+            width: 10px;
+          }
+
+          [part="text"] {
+            background-color: rgb(255, 255, 255);
+          }
+        </style>
+      </template>
+    </dom-module>
+
     <dom-module id="custom-test-style-override-styles-first" theme-for="test-style-override">
       <template>
         <style>
@@ -190,6 +214,8 @@
 
           [part="text"] {
             color: rgb(0, 0, 0);
+            width: 10px;
+            background-color: rgb(0, 0, 0);
           }
         </style>
       </template>
@@ -201,6 +227,11 @@
           :host {
             position: relative;
           }
+
+          [part="text"] {
+            width: 10px;
+            background-color: rgb(0, 0, 0);
+          }
         </style>
       </template>
     </dom-module>
@@ -210,6 +241,11 @@
         <style>
           :host {
             display: flex;
+          }
+
+          [part="text"] {
+            width: 10px;
+            background-color: rgb(0, 0, 0);
           }
         </style>
       </template>
@@ -224,6 +260,18 @@
 
           [part="text"] {
             color: rgb(255, 255, 255);
+            width: 10px;
+            background-color: rgb(0, 0, 0);
+          }
+        </style>
+      </template>
+    </dom-module>
+
+    <dom-module id="negative-priority-test-style-override-styles-second" theme-for="test-style-override" priority="-1">
+      <template>
+        <style>
+          :host {
+            position: fixed;
           }
         </style>
       </template>
@@ -308,12 +356,20 @@
         expect(window.getComputedStyle(components[6].$.text).color).to.equal('rgb(0, 0, 0)');
       });
 
-      it('should respect vaadin module styles order', function() {
+      it('should respect vaadin style module order', function() {
         expect(window.getComputedStyle(components[6]).display).to.equal('block');
       });
 
-      it('should respect custom module styles order', function() {
+      it('should respect custom style module order', function() {
         expect(window.getComputedStyle(components[6]).position).to.equal('relative');
+      });
+
+      it('should respect style module priority 1', function() {
+        expect(window.getComputedStyle(components[6].$.text).backgroundColor).to.equal('rgb(255, 255, 255)');
+      });
+
+      it('should respect style module priority 2', function() {
+        expect(window.getComputedStyle(components[6].$.text).width).to.equal('100px');
       });
 
     });
