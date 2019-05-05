@@ -165,6 +165,12 @@ The value of the `theme-for` attribute can be a space-separated list of element 
 
 When creating a theme module for an element, the styles in that theme module will apply to all instances of that element. The styles are always “global” in that sense and can’t be scoped by default with anything.
 
+### Theme module import order
+
+`ThemableMixin` has a theme overriding mechanism. To import the style modules in correct order they should be imported in the following order:
+1. `vaadin-` theme modules
+2. `lumo-` and `material-` theme modules
+3. Rest of your theme modules (custom themes)
 
 
 # Stylable Shadow Parts
