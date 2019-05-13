@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="import" href="./vaadin-themable-mixin.html">
+  <link rel="import" href="../polymer/polymer-element.html">
+  <link rel="stylesheet" type="text/css" href="foo-bar.css">
+
+  <!-- <dom-module id="foo-bar" theme-for="test-component">
+    <template>
+      <style>
+        [part~="inner"] {
+          color: blue;
+        }
+      </style>
+    </template>
+  </dom-module> -->
+
+  <style media="test-component">
+    :host {
+      display: block;
+      outline: 1px solid blue;
+    }
+
+    [part~="inner"] {
+      color: blue;
+    }
+  </style>
+
+  <script>
+    customElements.define('test-component', class extends Vaadin.ThemableMixin(Polymer.Element) {
+
+      static get is() {
+        return 'test-component';
+      }
+
+      static get template() {
+        return Polymer.html`
+          <div part="inner">Foo</div>
+        `
+      }
+
+    });
+
+  </script>
+</head>
+<body>
+
+  <test-component></test-component>
+</body>
+</html>

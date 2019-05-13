@@ -29,6 +29,31 @@
       }
 
       this._includeMatchingThemes(template);
+
+      this._includeMatchingThemes2(template);
+    }
+
+    /** @protected */
+    static _includeMatchingThemes2(template) {
+      const matchingRules = [];
+
+      for (const s of document.styleSheets) {
+        for (const r of s.rules) {
+          for (const cr of (r.cssRules || [r])) {
+            const themeFor = (cr.parentRule || cr.parentStyleSheet).media[0];
+            if (matchingRules.indexOf(cr) === -1 && this.is && themeFor === this.is) {
+              matchingRules.push(cr);
+            }
+          }
+        }
+      }
+
+      if (matchingRules.length && !template.__patched) {
+        template.__patched = true;
+        const styleEl = document.createElement('style');
+        styleEl.innerText = matchingRules.map(r => r.cssText).join(' ');
+        template.content.appendChild(styleEl);
+      }
     }
 
     /** @protected */

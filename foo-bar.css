@@ -1,0 +1,5 @@
+@media test-component {
+  :host {
+    background: lightgrey;
+  }
+}
