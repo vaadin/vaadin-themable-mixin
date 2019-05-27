@@ -1,5 +1,7 @@
 import { DomModule } from '@polymer/polymer/lib/elements/dom-module.js';
 import { ThemePropertyMixin } from './vaadin-theme-property-mixin.js';
+import { cssFromModule } from '@polymer/polymer/lib/utils/style-gather';
+import { unsafeCSS } from 'lit-element';
 
 /**
  * @polymerMixin
@@ -78,6 +80,8 @@ export const ThemableMixin = superClass => class VaadinThemableMixin extends The
       const styleEl = document.createElement('style');
       styleEl.setAttribute('include', moduleName);
       template.content.appendChild(styleEl);
+    } else if (this._styles) {
+      this._styles.push(unsafeCSS(cssFromModule(moduleName)));
     }
   }
 
