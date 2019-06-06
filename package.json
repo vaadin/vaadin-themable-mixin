@@ -2,7 +2,7 @@
   "name": "@vaadin/vaadin-themable-mixin",
   "version": "1.4.4",
   "description": "vaadin-themable-mixin",
-  "main": "vaadin-themable-mixin.html",
+  "main": "vaadin-themable-mixin.js",
   "repository": "vaadin/vaadin-themable-mixin",
   "keywords": [
     "Vaadin",
@@ -15,24 +15,60 @@
   "bugs": {
     "url": "https://github.com/vaadin/vaadin-themable-mixin/issues"
   },
-  "homepage": "https://vaadin.com/elements",
+  "homepage": "https://vaadin.com/components",
   "files": [
     "vaadin-*.js"
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "lint-staged"
     }
   },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "scripts": {
-    "test": "wct",
-    "lint": "npm-run-all --parallel lint:*",
-    "lint:css": "stylelint *.html test/*html",
-    "lint:html": "eslint *.html test --ext .html",
-    "lint:js": "eslint *.js",
-    "lint:polymer": "polymer lint --rules polymer-2 --input *.html"
+    "lint": "eslint *.js test",
+    "test": "karma start",
+    "test:sauce": "cross-env TEST_PLATFORM=sauce karma start"
+  },
+  "dependencies": {
+    "@polymer/polymer": "^3.0.0"
   },
   "devDependencies": {
-    "@vaadin/vaadin-component-dev-dependencies": "^3.0.0"
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/runtime": "^7.4.5",
+    "@open-wc/testing-helpers": "^0.9.5",
+    "@webcomponents/webcomponentsjs": "^2.2.10",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.6",
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.3",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-vaadin": "^0.2.7",
+    "husky": "^2.3.0",
+    "istanbul-instrumenter-loader": "^3.0.1",
+    "karma": "^4.1.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage-istanbul-reporter": "^2.0.5",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-mocha": "^1.3.0",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-sauce-launcher": "^2.0.2",
+    "karma-sinon-chai": "^2.0.2",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^4.0.0-rc.6",
+    "lint-staged": "^8.1.7",
+    "lit-html": "^1.0.0",
+    "mocha": "^6.1.4",
+    "sinon": "^7.3.1",
+    "sinon-chai": "^3.3.0",
+    "webpack": "^4.32.2"
   }
 }

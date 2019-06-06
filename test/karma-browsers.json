@@ -1,0 +1,33 @@
+{
+  "chrome_headless": {
+    "base": "ChromeHeadless",
+    "flags": [
+      "--disable-gpu",
+      "--no-sandbox"
+    ]
+  },
+  "firefox_headless": {
+    "base": "Firefox",
+    "flags": [
+      "-headless"
+    ]
+  },
+  "sl_safari_latest": {
+    "base": "SauceLabs",
+    "browserName": "safari",
+    "platform": "Mac 10.13",
+    "version": "latest"
+  },
+  "sl_ios_12": {
+    "base": "SauceLabs",
+    "browserName": "iphone",
+    "platform": "OS X 10.13",
+    "version": "12.2"
+  },
+  "sl_edge_18": {
+    "base": "SauceLabs",
+    "browserName": "microsoftedge",
+    "platform": "Windows 10",
+    "version": "18"
+  }
+}
