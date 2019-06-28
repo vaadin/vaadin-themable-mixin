@@ -1,0 +1,42 @@
+<script>
+(function() {
+  /**
+   * @namespace Vaadin
+   */
+  window.Vaadin = window.Vaadin || {};
+
+  Vaadin.css = strings => strings[0];
+
+  let styleIdIndex = 0;
+  Vaadin.addStyle = ({
+    css,
+    themeFor,
+    include,
+    styleId = `custom-style-module-${styleIdIndex++}`
+  }) => {
+    const domModuleElement = document.createElement('dom-module');
+    domModuleElement.id = styleId;
+
+    if (themeFor) {
+      const elementClass = window.customElements && window.customElements.get(themeFor);
+      if (elementClass && elementClass.hasOwnProperty('__finalized')) {
+        console.warn(`The custom element definition for "${themeFor}"
+        was finalized before a style module was registered.
+        Make sure to add component specific style modules before
+        importing the corresponding custom element.`);
+      }
+      domModuleElement.setAttribute('theme-for', themeFor);
+    }
+
+    domModuleElement.innerHTML = `
+      <template>
+        <style ${include ? `include=${include}`: ''}>
+          ${css}
+        </style>
+      </template>
+    `;
+
+    document.head.appendChild(domModuleElement);
+  };
+})();
+</script>
