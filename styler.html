@@ -1,0 +1,111 @@
+<link rel="import" href="../polymer/lib/elements/dom-module.html">
+
+<script>
+(function() {
+
+  /**
+   * @namespace Vaadin
+   */
+  window.Vaadin = window.Vaadin || {};
+
+  let styleIdIndex = 0;
+
+  class StyleResult {
+
+    constructor(css) {
+      this.__css = css;
+      this.__includes = [];
+    }
+
+    /**
+     * Includes other styles by the id's they're registered with.
+     *
+     * @param {String[]} ids The ids of the registered styles to include
+     * @return {StyleResult} self
+     */
+    include(...ids) {
+      this.__includes = this.__includes.concat(ids);
+      return this;
+    }
+
+    /**
+     * Registers the style with an id for reuse.
+     *
+     * @param {String} id The id to register with
+     * @return {void}
+     */
+    registerWithId(id) {
+      this.__defineStyle({
+        css: this.__css,
+        styleId: id,
+        includes: this.__includes
+      });
+    }
+
+    /**
+     * Registers the style for a Component type (that extend ThemableMixin).
+     *
+     * @param {String} themeFor the Component's local/tag name
+     * @param {String} id optional id that also registers the style with the id for reuse
+     * @return {void}
+     */
+    registerForComponent(themeFor, id) {
+      this.__defineStyle({
+        css: this.__css,
+        themeFor,
+        styleId: id,
+        includes: this.__includes
+      });
+    }
+
+    __defineStyle({
+      css,
+      themeFor,
+      includes,
+      styleId = `custom-style-module-${styleIdIndex++}`
+    }) {
+      const domModuleElement = document.createElement('dom-module');
+
+      if (themeFor) {
+        const elementClass = window.customElements && window.customElements.get(themeFor);
+        if (elementClass && elementClass.hasOwnProperty('__finalized')) {
+          console.warn(`The custom element definition for "${themeFor}"
+          was finalized before a style module was registered.
+          Make sure to add component specific style modules before
+          importing the corresponding custom element.`);
+        }
+        domModuleElement.setAttribute('theme-for', themeFor);
+      }
+
+      domModuleElement.innerHTML = `
+        <template>
+          ${includes.map(include => `<style include=${include}></style>`)}
+          ${css ? `<style>${css}</style>` : ''}
+        </template>
+      `;
+
+      domModuleElement.register(styleId);
+    }
+
+  }
+
+  /**
+   * An optional template tag which can be used for syntax highlighitng
+   * purposes.
+   */
+  Vaadin.css = (strings, ...values) => values.reduce(
+    (acc, v, idx) => acc + String(v) + strings[idx + 1],
+    strings[0]);
+
+  /**
+   * Creates an object which wraps the provided CSS string. The object
+   * has additional API for including other styles and registering
+   * the CSS as a Component style or as a reusable style with an id.
+   *
+   * @param {String} css The CSS value
+   * @return {StyleResult} The resulting StyleResult wrapper object
+   */
+  Vaadin.createStyle = css => new StyleResult(css);
+
+})();
+</script>

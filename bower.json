@@ -8,7 +8,7 @@
   "main": [
     "vaadin-themable-mixin.html",
     "vaadin-theme-property-mixin.html",
-    "theming-util.html"
+    "styler.html"
   ],
   "keywords": [
     "Vaadin",
