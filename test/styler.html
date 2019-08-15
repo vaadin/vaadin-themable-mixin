@@ -53,7 +53,7 @@
       }
 
       beforeEach(() => {
-        style = Vaadin.createStyle(Vaadin.css`
+        style = Vaadin.createStyle(`
           :host {
             color: rgb(255, 0, 0);
           }
@@ -134,18 +134,6 @@
         Vaadin.createStyle()
           .include(unique('styles2'))
           .registerForComponent(unique());
-
-        const instance = defineAndInstantiate(unique());
-        expect(window.getComputedStyle(instance).color).to.equal('rgb(255, 0, 0)');
-      });
-
-      it('should work with split template literals', () => {
-        const color = 'rgb(255, 0, 0)';
-        style = Vaadin.createStyle(Vaadin.css`
-          :host {
-            color: ${color};
-          }
-        `).registerForComponent(unique());
 
         const instance = defineAndInstantiate(unique());
         expect(window.getComputedStyle(instance).color).to.equal('rgb(255, 0, 0)');

@@ -90,14 +90,6 @@
   }
 
   /**
-   * An optional template tag which can be used for syntax highlighitng
-   * purposes.
-   */
-  Vaadin.css = (strings, ...values) => values.reduce(
-    (acc, v, idx) => acc + String(v) + strings[idx + 1],
-    strings[0]);
-
-  /**
    * Creates an object which wraps the provided CSS string. The object
    * has additional API for including other styles and registering
    * the CSS as a Component style or as a reusable style with an id.
