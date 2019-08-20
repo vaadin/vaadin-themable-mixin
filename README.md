@@ -158,45 +158,44 @@ The `id` attribute of the theme module should be unique. You can also re-use an 
 
 The value of the `theme-for` attribute can be a space-separated list of element names, and can contain wildcard element names as well.</p>
 
-### Theme modules in JavaScript
+### Styling in JavaScript
 
-Especially when working with ES modules/JavaScript generally, constructing theme modules programmatically might end up producing boilterplace code to the application. Where possible, you should prefer the `styler` utility which provides a convenient abstraction over the declarative API.
+Especially when working with ES modules/JavaScript generally, constructing theme modules programmatically might end up producing boilterplace code to the application. Where possible, you should prefer the `registerStyles` utility which provides a convenient abstraction over the declarative API.
 
 Importing the helper (as an HTMLImport)
 ```html
-<link rel="import" href="../styler.html">
+<link rel="import" href="../registerStyles.html">
 ```
 
 Importing the helper (as an ES module)
 ```js
-import { createStyle } from '@vaadin/vaadin-themable-mixin/styler.js';
+import { registerStyles } from '@vaadin/vaadin-themable-mixin/registerStyles.js';
 ```
 
-To create a style module, use the `createStyle(css)` API from the `styler` utility and then invoke `registerForComponent(themeFor)` to register it globally as a theme module for a component type.
+Use the `registerStyles(themeFor, ...styles)` function to register CSS styles to be included in a component's local scope. The `themeFor` parameter is of type string and is used to identify the component type the styles are applied to. It works the same as with style modules. The `...styles` accepts an arbitrary list of string type parameters, each of which contains CSS style rules to be included in the targeted component's local style scope.
 
 ```js
-Vaadin.createStyle(`
+Vaadin.registerStyles('my-element', `
   /* Styles which will be included in my-element local scope */
-`).registerForComponent('my-element');
+`);
 ```
 
-> Note: Providing a module id is optional with the `registerForComponent` API. You can still pass an explicit id as the second parameter for `registerForComponent(themeFor, moduleId)` where necessary.
-
-You can register reusable style modules with the `registerWithId(id)` API.
+> Note: If you need to include styles defined as style modules with id, you can still pass the id as a parameter for `...styles` to get the module included. Consider this API deprecated though.
 
 ```js
-Vaadin.createStyle(`
-  /* Styles which will be included in the reusable module */
-`).registerWithId('my-shared-styles');
+Vaadin.registerStyles('my-element', `
+  /* Styles which will be included in my-element local scope */
+`, 'my-style-module');
 ```
 
-...and then include the reusable styles to a component's theme module.
+> Note: If you need to get styles defined with `registerStyles` registered as a style module with a pre-defined id, you can still do so by passing an object with `moduleId` as the last parameter for the function. Consider this API deprecated though.
 
 ```js
-Vaadin.createStyle(/* Optional styles */)
-  .include('my-shared-styles')
-  .registerForComponent('my-element');
+Vaadin.registerStyles(undefined, `
+  /* Styles which will be included in the style module */
+`, 'my-style-module', {moduleId: 'my-extended-style-module'});
 ```
+
 
 #### Examples of valid `theme-for` values:
  - `"vaadin-button"`
