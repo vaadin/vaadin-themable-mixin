@@ -105,9 +105,9 @@
         }).to.throw(Error);
       });
 
-      it('should throw if css is constructed', () => {
+      it('should throw if CSSResult is constructed', () => {
         expect(() => {
-          new Vaadin.css(`:host {
+          new CSSResult(`:host {
             color: rgb(255, 0, 0);
           }`);
         }).to.throw(Error);
