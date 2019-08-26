@@ -164,12 +164,12 @@ Especially when working with ES modules/JavaScript generally, constructing theme
 
 Importing the helper (as an HTMLImport)
 ```html
-<link rel="import" href="../registerStyles.html">
+<link rel="import" href="../register-styles.html">
 ```
 
 Importing the helper (as an ES module)
 ```js
-import { registerStyles } from '@vaadin/vaadin-themable-mixin/registerStyles.js';
+import { registerStyles } from '@vaadin/vaadin-themable-mixin/register-styles.js';
 ```
 
 Use the `registerStyles(themeFor, ...styles)` function to register CSS styles to be included in a component's local scope. The `themeFor` parameter is of type string and is used to identify the component type the styles are applied to. It works the same as with style modules. The `...styles` accepts an arbitrary list of string type parameters, each of which contains CSS style rules to be included in the targeted component's local style scope.
