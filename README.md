@@ -195,17 +195,19 @@ Vaadin.registerStyles('my-element', [Vaadin.css`
 `, Vaadin.unsafeCSS(trustedCSSValue)]);
 ```
 
-> Note: If you need to include styles defined as Polymer style modules with id, you can still pass the module ids as `include` array of the third `options` parameter to the function. Consider this API deprecated though.
+> Note: If you need to include styles defined as Polymer style modules with id, you can still pass the module ids as `include` array of the third `options` parameter to the function. Consider this API deprecated.
 
 ```js
+// Use of "include" is deprecated!
 Vaadin.registerStyles('my-element', Vaadin.css`
   /* Styles which will be included in my-element local scope */
 `, {include: ['my-style-module']});
 ```
 
-> Note: If you need to get styles defined with `registerStyles` registered as a Polymer style module with a pre-defined id, you can still do so by passing an object with `moduleId` as the third parameter for the function. Consider this API deprecated though.
+> Note: If you need to get styles defined with `registerStyles` registered as a Polymer style module with a pre-defined id, you can still do so by passing an object with `moduleId` as the third parameter for the function. Consider this API deprecated.
 
 ```js
+// Use of "moduleId" is deprecated!
 Vaadin.registerStyles(undefined, Vaadin.css`
   /* Styles which will be included in the style module */
 `, {moduleId: 'my-extended-style-module'});
