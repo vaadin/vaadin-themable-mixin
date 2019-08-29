@@ -160,7 +160,7 @@ The value of the `theme-for` attribute can be a space-separated list of element 
 
 ### Styling in JavaScript
 
-When working with ES modules/JavaScript generally, constructing theme modules programmatically might end up producing boilterplace code to the application. Where possible, you should prefer the `registerStyles` utility which provides a convenient abstraction over the declarative API.
+When working with ES modules/JavaScript generally, constructing theme modules programmatically might end up producing boilerplate code to the application. Where possible, you should prefer the `registerStyles` utility which provides a convenient abstraction over the declarative API.
 
 Importing the helper (as an HTMLImport)
 ```html
@@ -376,7 +376,7 @@ There are two ways to scope the styles that you write in a theme module.
  1. **Expose new custom properties**  
 This is the recommended first option for simple situations. If you end up exposing more than a handful of properties, you should consider the second option.
  2. **Use scoping selectors**  
-This approach is used by the built-in variations in Vaadin themes (Valo and Material), i.e. `theme` attribute. The downside of this approach is that you end up adding the selectors and properties to all instances, even though only some instances will need those styles (they won’t apply unless the scoping selector is used on the host element).
+This approach is used by the built-in variations in Vaadin themes (Lumo and Material), i.e. `theme` attribute. The downside of this approach is that you end up adding the selectors and properties to all instances, even though only some instances will need those styles (they won’t apply unless the scoping selector is used on the host element).
 
 #### Example: expose new custom properties
 ```html
@@ -417,7 +417,6 @@ This approach is used by the built-in variations in Vaadin themes (Valo and Mate
         color: #fff;
         border: 2px solid #fff;
         border-radius: 9px;
-        ...
       }
     </style>
   </template>
@@ -443,7 +442,6 @@ You can also use a `theme` attribute as a scoping selector for your style overri
         color: #fff;
         border: 2px solid #fff;
         border-radius: 9px;
-        ...
       }
     </style>
   </template>
@@ -482,7 +480,6 @@ If you can define a custom theme variant for `<vaadin-text-field>`, you can use 
         color: #fff;
         border: 2px solid #fff;
         border-radius: 9px;
-        ...
       }
     </style>
   </template>
