@@ -93,7 +93,7 @@ If we wanted to move the border to the actual text input element, we would need 
 
 # Adding Styles to Local Scope
 
-*Read the documentation about [Styles Scopes](https://github.com/vaadin/vaadin-themable-mixin/wiki/1.-Style-Scopes) before continuing.*
+*Read the documentation about [Style Scopes](#style-scopes) before continuing.*
 
 
 ## Property inheritance
@@ -112,7 +112,7 @@ Currently, the only global CSS that can affect styles inside a shadow DOM’s lo
 </custom-style>
 ```
 
-> Note: for cross-browser compatibility, [use the `<custom-style>` element](https://www.polymer-project.org/2.0/docs/devguide/style-shadow-dom#custom-style).
+> Note: for cross-browser compatibility, [use the `<custom-style>` element](https://polymer-library.polymer-project.org/2.0/docs/devguide/style-shadow-dom#custom-style).
 
 > Note: check the API documentation of each element for the custom properties they expose. See the [API documentation for vaadin-combo-box](https://vaadin.com/elements/vaadin-combo-box/html-api/elements/Vaadin.ComboBoxElement#styling) for example.
 
@@ -135,7 +135,7 @@ The web platform doesn’t currently provide a way to write selectors in the glo
 
 ## Theme modules
 
-Custom elements extending [`ThemableMixin`](https://github.com/vaadin/vaadin-themable-mixin) allow you to inject styles into their local scope by defining new [style modules](https://www.polymer-project.org/2.0/docs/devguide/style-shadow-dom#style-modules) in the global scope. You specify the targeted element using the `theme-for` attribute.
+Custom elements extending [`ThemableMixin`](https://github.com/vaadin/vaadin-themable-mixin) allow you to inject styles into their local scope by defining new [style modules](https://polymer-library.polymer-project.org/2.0/docs/devguide/style-shadow-dom#style-modules) in the global scope. You specify the targeted element using the `theme-for` attribute.
 
 ```html
 <!-- Define a theme module (in index.html or in a separate HTML import) -->
@@ -228,7 +228,7 @@ When creating a theme module for an element, the styles in that theme module wil
 
 # Stylable Shadow Parts
 
-*Read the documentation about [Styles Scopes](https://github.com/vaadin/vaadin-themable-mixin/wiki/1.-Style-Scopes) and [Adding Styles to Local Scope](https://github.com/vaadin/vaadin-themable-mixin/wiki/2.-Adding-Styles-to-Local-Scope) before continuing.*
+*Read the documentation about [Style Scopes](#style-scopes) and [Adding Styles to Local Scope](#adding-styles-to-local-scope) before continuing.*
 
 
 ## Stylable elements
@@ -559,4 +559,4 @@ CustomElements.define(MyFieldElement.is, MyFieldElement);
 
 
 # External resources
-- [Polymer styling documentation](https://www.polymer-project.org/2.0/docs/devguide/style-shadow-dom)
+- [Polymer styling documentation](https://polymer-library.polymer-project.org/2.0/docs/devguide/style-shadow-dom)
