@@ -20,7 +20,7 @@ With the addition of Shadow DOM, styles on a webpage can be divided into two gro
 On a regular website, all elements are inside the same global style scope, and can be styled with global stylesheets (either `<link rel="stylesheet">` or `<style>` elements), using regular CSS selectors.
 
 #### Example: Global stylesheet
-![](https://www.dropbox.com/s/4nxndstebfjhu4z/vaadin-text-field-light-dom.png?raw=1)
+![vaadin-text-field light DOM](docs-images/vaadin-text-field-light-dom.png)
 
 The only thing we can style using global styles is the whole `<vaadin-text-field>` element, but nothing inside it, like the *label* or the *input field*.
 
@@ -34,7 +34,7 @@ vaadin-text-field {
 
 And it would produce the following result:
 
-![](https://www.dropbox.com/s/4lkvmuudludhey4/vaadin-text-field-border.png?raw=1)
+![vaadin-text-field with a border around the whole component](docs-images/vaadin-text-field-border.png)
 
 ## Local Style Scope (Shadow DOM)
 
@@ -46,7 +46,7 @@ The only CSS selectors that can affect the elements inside a shadow DOM need to 
 
 #### Example: Local style
 
-![](https://www.dropbox.com/s/dtl7ha54xnb7un1/vaadin-text-field-shadow-dom.png?raw=1)
+![vaadin-text-field shadow DOM](docs-images/vaadin-text-field-shadow-dom.png)
 
 Only the `<style>` element highlighted in the inspector can affect the elements inside the `<vaadin-text-field>` element’s shadow DOM.
 
@@ -61,7 +61,7 @@ For example, if we move the same styles from the previous example inside the `<s
   </style>
 ```
 
-![](https://www.dropbox.com/s/66af3mw26grxdc3/vaadin-text-field.png?raw=1)
+![vaadin-text-field with default styles](docs-images/vaadin-text-field.png)
 
 That is because there are no `<vaadin-text-field>` elements inside the shadow DOM. If we want the same result as with the global stylesheet, we need to use the `:host` selector to match the element which is the “host” for this shadow DOM or style scope:
 
@@ -76,7 +76,7 @@ That is because there are no `<vaadin-text-field>` elements inside the shadow DO
 
 Then we get the same result as with the global stylesheet:
 
-![](https://www.dropbox.com/s/4lkvmuudludhey4/vaadin-text-field-border.png?raw=1)
+![vaadin-text-field with a border around the whole component](docs-images/vaadin-text-field-border.png)
 
 If we wanted to move the border to the actual text input element, we would need to inspect the shadow DOM hierarchy and see which selector would match that particular element. For `<vaadin-text-field>`, the correct selector would be `[part="input-field"]`:
 
@@ -88,7 +88,7 @@ If we wanted to move the border to the actual text input element, we would need 
     }
   </style>
 ```
-![](https://www.dropbox.com/s/9zo4te8pz74oe9q/vaadin-text-field-input-border.png?raw=1)
+![vaadin-text-field with a border around the input only](docs-images/vaadin-text-field-input-border.png)
 
 
 # Adding Styles to Local Scope
@@ -246,7 +246,7 @@ Other elements should be **considered as internal implementation details**, and 
 The stylable elements have the `part` attribute, which gives the elements a descriptive name.
 
 #### Example: stylable parts of vaadin-text-field
-![](https://www.dropbox.com/s/g6l4xzujk8k7wda/vaadin-text-field-parts.png?raw=1)
+![vaadin-text-field with stylable parts highlighted in the UI and in shadow DOM markup](docs-images/vaadin-text-field-parts.png)
 
 You can expect these part names to remain constant and rely on the hierarchy of these parts (i.e. the `value` part will always be contained within `input-field`).
 
