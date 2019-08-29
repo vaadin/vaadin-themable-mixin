@@ -373,9 +373,9 @@ The styles defined in a “theme module” affect all the instances of the eleme
 
 There are two ways to scope the styles that you write in a theme module.
 
- 1. **Expose new custom properties**
+ 1. **Expose new custom properties**  
 This is the recommended first option for simple situations. If you end up exposing more than a handful of properties, you should consider the second option.
- 2. **Use scoping selectors**
+ 2. **Use scoping selectors**  
 This approach is used by the built-in variations in Vaadin themes (Valo and Material), i.e. `theme` attribute. The downside of this approach is that you end up adding the selectors and properties to all instances, even though only some instances will need those styles (they won’t apply unless the scoping selector is used on the host element).
 
 #### Example: expose new custom properties
@@ -429,6 +429,31 @@ This approach is used by the built-in variations in Vaadin themes (Valo and Mate
 </div>
 ```
 
+You can also use a `theme` attribute as a scoping selector for your style overrides, as shown in the example below.
+
+#### Example: scoping with `theme` attribute selector
+
+```html
+<!-- Define the theme module (in index.html or in a separate HTML import) -->
+<dom-module id="special-field-theme" theme-for="vaadin-text-field">
+  <template>
+    <style>
+      :host([theme~="special-field"]) [part="input-field"] {
+        background-color: #000;
+        color: #fff;
+        border: 2px solid #fff;
+        border-radius: 9px;
+        ...
+      }
+    </style>
+  </template>
+</dom-module>
+
+<!-- Apply the theme attribute to any text-field in your app -->
+<div>
+  <vaadin-text-field theme="special-field"></vaadin-text-field>
+</div>
+```
 
 
 # Theme Attribute and Subcomponents
