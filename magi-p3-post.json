@@ -1,0 +1,11 @@
+{
+  "files": ["package.json", "test/register-styles.html"],
+  "from": [
+    "\"devDependencies\": {",
+    "import { css, registerStyles, unsafeCSS } from '../register-styles.js';"
+  ],
+  "to": [
+    "\"devDependencies\": {\n  \"lit-element\": \"^2.0.0\",",
+    "import { css, registerStyles, unsafeCSS } from '../register-styles.js';\nimport { css as litCss, CSSResult as LitCSSResult } from 'lit-element';"
+  ]
+}

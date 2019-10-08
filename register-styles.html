@@ -24,13 +24,14 @@
    */
   Vaadin.registerStyles = (themeFor, styles, options) => {
     const themeId = (options && options.moduleId) || `custom-style-module-${moduleIdIndex++}`;
+    const factory = (options && options.factory) || CSSResult;
 
     if (!Array.isArray(styles)) {
       styles = styles ? [styles] : [];
     }
 
     styles.forEach(cssResult => {
-      if (!(cssResult instanceof CSSResult)) {
+      if (!(cssResult instanceof factory)) {
         throw new Error(
           'An item in styles is not of type CSSResult. Use `unsafeCSS` or `css`.');
       }
