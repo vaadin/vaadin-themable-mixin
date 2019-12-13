@@ -1,0 +1,58 @@
+<!doctype html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>vaadin-element-mixin tests</title>
+
+  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../vaadin-dir-mixin.html">
+  <link rel="import" href="../../polymer/polymer-element.html">
+</head>
+
+<body>
+  <script>
+    describe('basic functionality', function() {
+
+      function setDir(direction) {
+        if (direction) {
+          document.documentElement.setAttribute('dir', direction);
+        } else {
+          document.documentElement.removeAttribute('dir');
+        }
+      }
+
+      it('should define window.Vaadin', function() {
+        expect(window.Vaadin).to.exist;
+      });
+
+      it('should propagate direction as dir attribute to the element', done => {
+        class TestElement extends Vaadin.DirMixin(Polymer.Element) {
+          static get is() {
+            return 'test-element';
+          }
+        }
+        customElements.define(TestElement.is, TestElement);
+
+        const elem = document.createElement('test-element');
+        document.body.appendChild(elem);
+
+        setDir('rtl');
+        setTimeout(() => {
+          expect(elem.getAttribute('dir')).to.equal('rtl');
+
+          setDir('ltr');
+          setTimeout(() => {
+            expect(elem.getAttribute('dir')).to.equal('ltr');
+
+            setDir();
+            setTimeout(() => {
+              expect(elem.hasAttribute('dir')).to.be.false;
+              done();
+            });
+          });
+        });
+      });
+    });
+  </script>
+</body>

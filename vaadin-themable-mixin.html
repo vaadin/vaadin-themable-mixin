@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/lib/elements/dom-module.html">
 <link rel="import" href="vaadin-theme-property-mixin.html">
+<link rel="import" href="vaadin-dir-mixin.html">
 
 <script>
   /**
@@ -12,7 +13,7 @@
    * @memberof Vaadin
    * @mixes Vaadin.ThemePropertyMixin
    */
-  Vaadin.ThemableMixin = superClass => class VaadinThemableMixin extends Vaadin.ThemePropertyMixin(superClass) {
+  Vaadin.ThemableMixin = superClass => class VaadinThemableMixin extends Vaadin.DirMixin(Vaadin.ThemePropertyMixin(superClass)) {
 
     /** @protected */
     static finalize() {

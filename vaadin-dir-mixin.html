@@ -1,0 +1,34 @@
+<script>
+(function() {
+  /**
+   * @namespace Vaadin
+   */
+  window.Vaadin = window.Vaadin || {};
+
+  /**
+   * @polymerMixin
+   * @memberof Vaadin
+   */
+  Vaadin.DirMixin = superClass => class VaadinDirMixin extends superClass {
+    connectedCallback() {
+      super.connectedCallback();
+
+      this.observer = new MutationObserver(this.updateDirection.bind(this));
+      this.observer.observe(document.documentElement, {attributes: true, attributeFilter: ['dir']});
+    }
+
+    updateDirection() {
+      // For testing purpose only
+      if (window.Vaadin.disableDirMixin) {
+        return;
+      }
+
+      if (document.documentElement.hasAttribute('dir')) {
+        this.setAttribute('dir', document.documentElement.getAttribute('dir'));
+      } else {
+        this.removeAttribute('dir');
+      }
+    }
+  };
+})();
+</script>
