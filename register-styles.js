@@ -23,10 +23,9 @@ export const registerStyles = (themeFor, styles, options) => {
     styles = styles ? [styles] : [];
   }
 
-  styles.forEach(cssResult => {
+  styles.forEach((cssResult) => {
     if (!(cssResult instanceof CSSResult)) {
-      throw new Error(
-        'An item in styles is not of type CSSResult. Use `unsafeCSS` or `css`.');
+      throw new Error('An item in styles is not of type CSSResult. Use `unsafeCSS` or `css`.');
     }
     if (!styleMap[cssResult]) {
       const styleModuleElement = document.createElement('dom-module');
@@ -45,7 +44,7 @@ export const registerStyles = (themeFor, styles, options) => {
   const themeModuleElement = document.createElement('dom-module');
   if (themeFor) {
     const elementClass = window.customElements && window.customElements.get(themeFor);
-    if (elementClass && elementClass.hasOwnProperty('__finalized')) {
+    if (elementClass && Object.prototype.hasOwnProperty.call(elementClass, '__finalized')) {
       console.warn(`The custom element definition for "${themeFor}"
       was finalized before a style module was registered.
       Make sure to add component specific style modules before
@@ -58,8 +57,8 @@ export const registerStyles = (themeFor, styles, options) => {
 
   themeModuleElement.innerHTML = `
     <template>
-      ${moduleIncludes.map(include => `<style include=${include}></style>`)}
-      ${styles.map(style => `<style include=${styleMap[style]}></style>`)}
+      ${moduleIncludes.map((include) => `<style include=${include}></style>`)}
+      ${styles.map((style) => `<style include=${styleMap[style]}></style>`)}
     </template>
   `;
 
