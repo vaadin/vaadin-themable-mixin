@@ -1,15 +1,10 @@
-export {ThemePropertyMixin};
-
 declare function ThemePropertyMixin<T extends new (...args: any[]) => {}>(base: T): T & ThemePropertyMixinConstructor;
 
 interface ThemePropertyMixinConstructor {
-  new(...args: any[]): ThemePropertyMixin;
+  new (...args: any[]): ThemePropertyMixin;
 }
 
-export {ThemePropertyMixinConstructor};
-
 interface ThemePropertyMixin {
-
   /**
    * Helper property with theme attribute value facilitating propagation
    * in shadow DOM.
@@ -25,6 +20,7 @@ interface ThemePropertyMixin {
    * See [Theme Attribute and Subcomponents](https://github.com/vaadin/vaadin-themable-mixin/wiki/5.-Theme-Attribute-and-Subcomponents).
    * page for more information.
    */
-  readonly theme: string|null|undefined;
-  attributeChangedCallback(name: any, oldValue: any, newValue: any): void;
+  readonly theme: string | null | undefined;
 }
+
+export { ThemePropertyMixin, ThemePropertyMixinConstructor };
