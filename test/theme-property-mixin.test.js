@@ -1,57 +1,27 @@
-<!doctype html>
-
-<head>
-  <meta charset="UTF-8">
-  <title>vaadin-themable-mixin tests</title>
-  <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-  <script src="../../../wct-browser-legacy/browser.js"></script>
-  <script type="module" src="../vaadin-theme-property-mixin.js"></script>
-  <script type="module" src="../../../@polymer/polymer/polymer-element.js"></script>
-  <script type="module" src="../../../@polymer/test-fixture/test-fixture.js"></script>
-</head>
-
-<body>
-
-  <dom-module id="theme-host">
-    <template>
-      <theme-target theme$="[[theme]]"></theme-target>
-    </template>
-  </dom-module>
-  <script type="module">
+import { expect } from '@esm-bundle/chai';
+import { fixtureSync } from '@open-wc/testing-helpers';
+import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import { ThemePropertyMixin } from '../vaadin-theme-property-mixin.js';
-import { PolymerElement } from '@polymer/polymer/polymer-element.js';
-import '@polymer/test-fixture/test-fixture.js';
+
 class ThemeHostElement extends ThemePropertyMixin(PolymerElement) {
   static get is() {
     return 'theme-host';
   }
+
+  static get template() {
+    return html`<div id="target" theme$="[[theme]]"></div>`;
+  }
 }
+
 customElements.define(ThemeHostElement.is, ThemeHostElement);
-</script>
 
-  <test-fixture id="default">
-    <template>
-      <theme-host></theme-host>
-    </template>
-  </test-fixture>
-
-  <test-fixture id="initialValue">
-    <template>
-      <theme-host theme="initial"></theme-host>
-    </template>
-  </test-fixture>
-
-  <script type="module">
-import '../vaadin-theme-property-mixin.js';
-import '@polymer/polymer/polymer-element.js';
-import '@polymer/test-fixture/test-fixture.js';
-describe('Vaadin.ThemePropertyMixin', () => {
+describe('ThemePropertyMixin', () => {
   let host, target;
 
   describe('by default', () => {
     beforeEach(() => {
-      host = fixture('default');
-      target = host.shadowRoot.querySelector('theme-target');
+      host = fixtureSync('<theme-host></theme-host>');
+      target = host.$.target;
     });
 
     it('should have undefined theme property on host', () => {
@@ -75,8 +45,8 @@ describe('Vaadin.ThemePropertyMixin', () => {
 
   describe('with initial value', () => {
     beforeEach(() => {
-      host = fixture('initialValue');
-      target = host.shadowRoot.querySelector('theme-target');
+      host = fixtureSync('<theme-host theme="initial"></theme-host>');
+      target = host.$.target;
     });
 
     it('should have initial theme property on host', () => {
@@ -97,10 +67,9 @@ describe('Vaadin.ThemePropertyMixin', () => {
       expect(target.getAttribute('theme')).to.equal('initial');
     });
 
-    it('should support unsetting target attribute from host', () => {
+    it('should remove target attribute when removing host attribute', () => {
       host.removeAttribute('theme');
       expect(target.getAttribute('theme')).to.be.null;
     });
   });
 });
-</script>
