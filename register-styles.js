@@ -43,7 +43,7 @@ export const registerStyles = (themeFor, styles, options) => {
 
   const themeModuleElement = document.createElement('dom-module');
   if (themeFor) {
-    const elementClass = window.customElements && window.customElements.get(themeFor);
+    const elementClass = customElements.get(themeFor);
     if (elementClass && Object.prototype.hasOwnProperty.call(elementClass, '__finalized')) {
       console.warn(`The custom element definition for "${themeFor}"
       was finalized before a style module was registered.
