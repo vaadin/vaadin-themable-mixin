@@ -26,9 +26,6 @@
     "lit-element": "^2.0.0",
     "@polymer/polymer": "^3.0.0"
   },
-  "scripts": {
-    "generate-typings": "gen-typescript-declarations --outDir . --verify"
-  },
   "devDependencies": {
     "@polymer/iron-test-helpers": "^3.0.0",
     "@webcomponents/webcomponentsjs": "^2.0.0",
