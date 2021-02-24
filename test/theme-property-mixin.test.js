@@ -18,7 +18,7 @@ customElements.define(ThemeHostElement.is, ThemeHostElement);
 describe('ThemePropertyMixin', () => {
   let host, target;
 
-  describe('by default', () => {
+  describe('default', () => {
     beforeEach(() => {
       host = fixtureSync('<theme-host></theme-host>');
       target = host.$.target;

@@ -55,7 +55,9 @@ describe('registerStyles', () => {
     `;
   });
 
-  beforeEach(() => testId++);
+  beforeEach(() => {
+    testId++;
+  });
 
   it('should add theme for a component', () => {
     registerStyles(unique(), styles);
