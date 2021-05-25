@@ -1,17 +1,14 @@
 # Table of Contents
 
+> ⚠️ Starting from Vaadin 20, the source code and issues for this component mixin are migrated to the [`vaadin/web-components`](https://github.com/vaadin/web-components/tree/master/packages/vaadin-themable-mixin) monorepository.
+> This repository contains the source code and releases of `@vaadin/vaadin-themable-mixin` for the Vaadin versions 10 to 19.
+
 1. [Style Scopes](#style-scopes)
 1. [Adding Styles to Local Scope](#adding-styles-to-local-scope)
 1. [Stylable Shadow Parts](#stylable-shadow-parts)
 1. [Scoping Styles in a Theme Module](#scoping-styles-in-a-theme-module)
 1. [Theme Attribute and Subcomponents](#theme-attribute-and-subcomponents)
 1. [External resources](#external-resources)
-
-> ⚠️ 　Starting from Vaadin 20, this project has migrated to [`vaadin-web-components`](https://github.com/vaadin/vaadin-web-components/tree/master/packages/vaadin-themable-mixin) *monorepository*.
->
-> This repository is used for Vaadin 14 LTS and Vaadin 19.
-
----
 
 # Style Scopes
 
