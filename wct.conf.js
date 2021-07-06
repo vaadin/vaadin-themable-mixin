@@ -9,33 +9,6 @@ var tunneledLocalhost = 'localhost-for-saucelabs';
 module.exports = {
   testTimeout: 180 * 1000,
   verbose: false,
-  plugins: {
-    local: {
-      browserOptions: {
-        chrome: [
-          'headless',
-          'disable-gpu',
-          'no-sandbox'
-        ]
-      }
-    },
-    // MAGI REMOVE START
-    istanbul: {
-      dir: './coverage',
-      reporters: ['text-summary', 'lcov'],
-      include: [
-        '**/vaadin-app-layout/src/*.html'
-      ],
-      exclude: [],
-      thresholds: {
-        global: {
-          statements: 80
-        }
-      }
-    }
-    // MAGI REMOVE END
-  },
-
   registerHooks: function(context) {
     const testBrowsers = [
       {
