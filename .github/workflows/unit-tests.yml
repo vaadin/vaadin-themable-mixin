@@ -28,8 +28,9 @@ jobs:
       - name: Install project Bower dependencies
         run: "bower install --quiet"
 
-      - name: Run automated magi-cli checks
-        run: "npm run check"
+      # not in vaadin-themable-mixin
+      # - name: Run automated magi-cli checks
+      #   run: "npm run check"
 
       - name: Run a linter
         run: "npm run lint"
