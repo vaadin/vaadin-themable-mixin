@@ -35,6 +35,6 @@
     "lint:polymer": "polymer lint --rules polymer-2 --input *.html"
   },
   "devDependencies": {
-    "@vaadin/vaadin-component-dev-dependencies": "3.2.0-pre.1"
+    "@vaadin/vaadin-component-dev-dependencies": "^3.2.0"
   }
 }
